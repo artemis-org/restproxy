@@ -5,9 +5,14 @@ import (
 )
 
 type Config struct {
-	AmqpUri     string `toml:"amqpUri"`
-	PoolSize    int    `toml:"poolSize"`   // Amount of connections to be BLPOP'ing
-	IdleTimeout int    `toml:"idleTimout"` // Pool idle timeout in seconds
+	AmqpUri           string `toml:"amqpUri"`
+	ConsumerPoolSize  int    `toml:"consumerPoolSize"`
+	PublisherPoolSize int    `toml:"publisherPoolSize"`
+	IdleTimeout       int    `toml:"idleTimout"` // Pool idle timeout in seconds
+	HttpTimeout       int    `toml:"httpTimeout"`
+	HttpPoolSize      int    `toml:"httpPoolSize"`
+	RedisUri          string `toml:"redisUri"`
+	RedisPoolSize     int    `toml:"redisPoolSize"`
 }
 
 type Provider int

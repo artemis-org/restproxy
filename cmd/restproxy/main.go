@@ -5,6 +5,7 @@ import (
 	"github.com/artemis/restproxy/amqp"
 	"github.com/artemis/restproxy/config"
 	"github.com/artemis/restproxy/proxy"
+	"github.com/artemis/restproxy/redis"
 	"os"
 	"os/signal"
 	"syscall"
@@ -14,21 +15,44 @@ func main() {
 	provider := config.GetConfigProvider()
 	provider.LoadConfig()
 
-	worker := proxy.NewWorker()
+	redisClient := redis.NewRedisClient()
+	redisClient.Connect(redis.CreateRedisURI(config.Conf.RedisUri))
+
+	worker := proxy.NewWorker(redisClient)
 	go worker.Start()
 
 	amqpClient := amqp.NewAmqpClient(&worker)
 	defer amqpClient.Close()
 
-	for i := 0; i < config.Conf.PoolSize; i++ {
-		go func() {
-			ch, q, err := amqpClient.CreateQueue(); if err != nil { // TODO: Proper error handling with ticker for retries
-				log.Error(err.Error())
-				return
-			}
+	ch, err := amqpClient.CreateChannel(); if err != nil { // TODO: Proper error handling with ticker for retries
+		log.Error(err.Error())
+		return
+	}
 
+	// Outbound as outbound from restproxy to Discord
+	consumer, err := amqpClient.CreateQueue(ch, "rpc_outbound"); if err != nil { // TODO: Proper error handling with ticker for retries
+		log.Error(err.Error())
+		return
+	}
+
+	// Inbound as inbound from Discord to restproxy
+	publisher, err := amqpClient.CreateQueue(ch, "rpc_inbound"); if err != nil { // TODO: Proper error handling with ticker for retries
+		log.Error(err.Error())
+		return
+	}
+
+	for i := 0; i < config.Conf.ConsumerPoolSize; i++ {
+		go func() {
 			for {
-				amqpClient.Handle(ch, q)
+				amqpClient.Handle(ch, consumer)
+			}
+		}()
+	}
+
+	for i := 0; i < config.Conf.PublisherPoolSize; i++ {
+		go func() {
+			for {
+				amqpClient.StartPublisher(ch, publisher)
 			}
 		}()
 	}

@@ -1,19 +1,20 @@
 package proxy
 
-import (
-	"fmt"
-	"strings"
-)
+import "github.com/artemis/restproxy/redis"
 
 const baseUrl = "https://discordapp.com/api/v6"
 
 type Worker struct {
 	Receiver chan Request
+	Responder chan Response
+	RedisClient *redis.RedisClient
 }
 
-func NewWorker() Worker {
+func NewWorker(redisClient *redis.RedisClient) Worker {
 	return Worker{
 		Receiver: make(chan Request),
+		Responder: make(chan Response),
+		RedisClient: redisClient,
 	}
 }
 
@@ -21,12 +22,6 @@ func (w *Worker) Start() {
 	for {
 		req := <- w.Receiver
 
-		url := baseUrl + req.Endpoint
-
-		for _, field := range req.Values {
-			url = strings.Replace(url, "{}", field, 1)
-		}
-
-		fmt.Println(url)
+		go req.Queue(*w)
 	}
 }

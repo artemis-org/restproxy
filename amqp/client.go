@@ -30,6 +30,6 @@ func NewAmqpClient(w *proxy.Worker) AmqpClient {
 		ResourcePool: pools.NewResourcePool(func() (pools.Resource, error) {
 			c, err := amqp.Dial(config.Conf.AmqpUri)
 			return AmqpConnection{c}, err
-		}, config.Conf.PoolSize, config.Conf.PoolSize, time.Duration(config.Conf.IdleTimeout) * time.Second),
+		}, config.Conf.ConsumerPoolSize + config.Conf.PublisherPoolSize, config.Conf.ConsumerPoolSize + config.Conf.PublisherPoolSize, time.Duration(config.Conf.IdleTimeout) * time.Second),
 	}
 }
