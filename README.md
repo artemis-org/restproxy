@@ -5,10 +5,10 @@ restproxy is a HTTP reverse proxy for the [Discord](https://discordapp.com) API 
 We use this utility on the [Artemis](https://artemisbot.io) bot in production.
 
 # How does this work?
-restproxy listens on a Redis list, from which it BLPOPs requests, encoded in JSON, which are unmarshalled to a struct
-containing the key information about the request.
+restproxy is based on an AMQP RPC architecture. A consumer listens on queue for API requests, performs them and then 
+responds through the publisher with the response from the Discord API.
 
-A request object is then created, using the URL, the request type, the headers and the content fields from the struct.
+A request object is created, using the URL, the request type, the headers and the content fields from the struct.
 
 The request is then sent to a queue, which the ratelimiter reads from as instructed to by the Discord API, to not trip
 the ratelimit and get a 429.
