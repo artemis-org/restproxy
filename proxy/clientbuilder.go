@@ -16,7 +16,7 @@ type HttpConnection struct {
 }
 
 func (c HttpConnection) Close() {
-	c.CloseIdleConnections()
+
 }
 
 func NewClient() HttpClient {

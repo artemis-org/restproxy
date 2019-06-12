@@ -8,7 +8,7 @@ type Config struct {
 	AmqpUri           string `toml:"amqpUri"`
 	ConsumerPoolSize  int    `toml:"consumerPoolSize"`
 	PublisherPoolSize int    `toml:"publisherPoolSize"`
-	IdleTimeout       int    `toml:"idleTimout"` // Pool idle timeout in seconds
+	IdleTimeout       int    `toml:"idleTimeout"` // Pool idle timeout in seconds
 	HttpTimeout       int    `toml:"httpTimeout"`
 	HttpPoolSize      int    `toml:"httpPoolSize"`
 	RedisUri          string `toml:"redisUri"`
