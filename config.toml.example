@@ -1,0 +1,8 @@
+amqpUri="amqp://"
+consumerPoolSize=10
+publisherPoolSize=10
+idleTimeout=120
+httpTimeout=90
+httpPoolSize=10
+redisUri="redis://:pwd@127.0.0.1:6379"
+redisPoolSize=10
