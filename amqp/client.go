@@ -2,8 +2,8 @@ package amqp
 
 import(
 	"github.com/apex/log"
-	"github.com/artemis/restproxy/config"
-	"github.com/artemis/restproxy/proxy"
+	"github.com/artemis-org/restproxy/config"
+	"github.com/artemis-org/restproxy/proxy"
 	"github.com/streadway/amqp"
 	"github.com/vitessio/vitess/go/pools"
 	"time"

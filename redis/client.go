@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"github.com/artemis/restproxy/config"
+	"github.com/artemis-org/restproxy/config"
 	"github.com/go-redis/redis"
 )
 

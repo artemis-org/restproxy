@@ -1,6 +1,6 @@
 package proxy
 
-import "github.com/artemis/restproxy/redis"
+import "github.com/artemis-org/restproxy/redis"
 
 const baseUrl = "https://discordapp.com/api/v6"
 

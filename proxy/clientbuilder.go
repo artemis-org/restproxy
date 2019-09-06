@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"github.com/artemis/restproxy/config"
+	"github.com/artemis-org/restproxy/config"
 	"github.com/vitessio/vitess/go/pools"
 	"net/http"
 	"time"

@@ -5,7 +5,7 @@ import (
 )
 
 func loadEnvVarConfig() {
-	if err := envconfig.Process("artemis", &Conf); err != nil {
+	if err := envconfig.Process("artemis-org", &Conf); err != nil {
 		panic(err)
 	}
 }

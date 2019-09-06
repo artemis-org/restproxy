@@ -1,4 +1,4 @@
-module github.com/artemis/restproxy
+module github.com/artemis-org/restproxy
 
 require(
     github.com/vitessio/vitess 3.0

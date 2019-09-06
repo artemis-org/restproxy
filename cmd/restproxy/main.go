@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/apex/log"
-	"github.com/artemis/restproxy/amqp"
-	"github.com/artemis/restproxy/config"
-	"github.com/artemis/restproxy/proxy"
-	"github.com/artemis/restproxy/redis"
+	"github.com/artemis-org/restproxy/amqp"
+	"github.com/artemis-org/restproxy/config"
+	"github.com/artemis-org/restproxy/proxy"
+	"github.com/artemis-org/restproxy/redis"
 	"os"
 	"os/signal"
 	"syscall"

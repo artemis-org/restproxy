@@ -3,7 +3,7 @@ package amqp
 import (
 	"context"
 	"github.com/apex/log"
-	"github.com/artemis/restproxy/proxy"
+	"github.com/artemis-org/restproxy/proxy"
 	"github.com/streadway/amqp"
 )
 
