@@ -1,4 +1,6 @@
 # What is this?
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fartemis-org%2Frestproxy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fartemis-org%2Frestproxy?ref=badge_shield)
+
 restproxy is a HTTP reverse proxy for the [Discord](https://discordapp.com) API that includes a ratelimiter.
 
 # Where is this used?
@@ -15,3 +17,6 @@ the ratelimit and get a 429.
 
 Finally, the response is then proxied back to the client. This means that HTTP requests may well take several seconds,
 and therefore clients using this utility must making all requests asynchronously.
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fartemis-org%2Frestproxy.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fartemis-org%2Frestproxy?ref=badge_large)
